@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
 
 framework:
-    #esi:             ~
+    esi:             ~
     translator:      { fallback: %locale% }
     secret:          %secret%
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -105,3 +105,9 @@ knp_paginator:
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_pagination.html.twig     # sliding pagination controls template
+
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Mongobox\UsersBundle\Entity\User

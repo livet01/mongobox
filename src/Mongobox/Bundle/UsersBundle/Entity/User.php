@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -16,9 +16,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Entity(repositoryClass="Mongobox\Bundle\UsersBundle\Entity\Repository\UserRepository")
  * @ORM\Table(name="users")
- * @UniqueEntity(fields="login", message="Login already in use.")
  */
-class User implements AdvancedUserInterface
+class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -26,29 +25,6 @@ class User implements AdvancedUserInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    protected $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    protected $login;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    protected $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $salt;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -167,98 +143,6 @@ class User implements AdvancedUserInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set the value of email.
-     *
-     * @param string $email
-     * @return \Mongobox\Bundle\UsersBundle\Entity\User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of email.
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set the value of login.
-     *
-     * @param string $login
-     * @return \Mongobox\Bundle\UsersBundle\Entity\User
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of login.
-     *
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-    /**
-     * Set the value of password.
-     *
-     * @param string $password
-     * @return \Mongobox\Bundle\UsersBundle\Entity\User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of password.
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set the value of salt.
-     *
-     * @param string $salt
-     * @return \Mongobox\Bundle\UsersBundle\Entity\User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of salt.
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
     }
 
     /**
